@@ -12,13 +12,14 @@ module.exports = function(app) {
 
 app.get("/api/friends", function(req, res) {
     res.json(friends);
+    console.log(friends)
 });
 
 //API POST Requests
 //Code used when user submits survey 
 
 app.post("api/friends", function(req, res) {
-console.log("json for survey")
+    var userInput= req.body;
 });
 
 };
