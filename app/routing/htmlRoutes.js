@@ -12,18 +12,21 @@ module.exports = function (app) {
     //Displays the Home page
 
     app.get("/", function (req, res) {
-        res.sendFile(path.join(__dirname, "../public/home.html"));
+       // res.sendFile(path.join(__dirname, "../public/home.html"));
+       res.render("index")
     });
-
+    
     //Displays the Survey page
-
+    
     app.get("/survey", function (req, res) {
-        res.sendFile(path.join(__dirname, "../public/survey.html"));
+       // res.sendFile(path.join(__dirname, "../public/survey.html"));
+        res.render("survey")
     });
 
     //If no matching route is found, default to Home
-
+    
     app.get("*", function (req, res) {
-        res.sendFile(path.join(__dirname, "../public/home.html"));
+       // res.sendFile(path.join(__dirname, "../public/home.html"));
+        res.render("index")
     });
 }

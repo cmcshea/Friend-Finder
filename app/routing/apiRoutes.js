@@ -1,7 +1,5 @@
 //Dependencies
-
-var path = require("path");
-var friends = require("../data/friends.js");
+var friends = require("../data/friends.json");
 
 //Routing
 
@@ -12,14 +10,43 @@ module.exports = function(app) {
 
 app.get("/api/friends", function(req, res) {
     res.json(friends);
-    console.log(friends)
 });
 
 //API POST Requests
 //Code used when user submits survey 
 
-app.post("api/friends", function(req, res) {
-    var userInput= req.body;
+app.post("/api/friends", function(req, res) {
+    var { name, photo, q1, q2 } = req.body;
+
+    var newFriend = {
+        name,
+        photo,
+        scores: [q1, q2]
+    }
+
+    var bestmatch = {
+        name: "",
+        photo: "",
+        diff: Infinity
+    }
+
+    for(var i = 0; i < friends.length; i++){
+        var thisFriend = friends[i];
+        var totalDiff = 0;
+        for(var j = 0; j < thisFriend.scores.length; j++){
+            totalDiff += Math.abs(parseInt(newFriend.scores[j] - parseInt(thisFriend.scores[j])))
+        }
+        if(totalDiff < bestmatch.diff){
+            bestmatch = {
+                name: thisFriend.name,
+                photo: thisFriend.photo,
+                diff: totalDiff
+            }
+        }
+    }
+
+    friends.push(newFriend);
+    res.render("survey", bestmatch)
 });
 
 };
