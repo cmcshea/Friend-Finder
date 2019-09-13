@@ -16,12 +16,12 @@ app.get("/api/friends", function(req, res) {
 //Code used when user submits survey 
 
 app.post("/api/friends", function(req, res) {
-    var { name, photo, q1, q2 } = req.body;
+    var { name, photo, q1, q2, q3, q4, q5, q6, q7, q8, q9, q10 } = req.body;
 
     var newFriend = {
         name,
         photo,
-        scores: [q1, q2]
+        scores: [q1, q2, q3, q4, q5, q6, q7, q8, q9, q10 ]
     }
 
     var bestmatch = {
@@ -42,6 +42,7 @@ app.post("/api/friends", function(req, res) {
                 photo: thisFriend.photo,
                 diff: totalDiff
             }
+           
         }
     }
 
