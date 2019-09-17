@@ -7,7 +7,7 @@ var bodyParser = require("body-parser");
 //Sets up Express app
 
 var app = express();
-var PORT = 3000;
+var PORT =  process.env.PORT || 3000;
 
 //Sets up Express app to handle data parsing
 // parse application/x-www-form-urlencoded
